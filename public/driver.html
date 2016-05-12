@@ -1,0 +1,190 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>文明的士</h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+	<div class="box box-primary">
+		<div class="box-header">
+			<h3 class="box-title">的士列表</h3>
+			<div class="box-tools">
+				<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#new-driver-modal">添加的士</button>
+			</div>
+		</div>
+		<div class="box-body">
+			<table class="table table-bordered table-striped table-hover" id="driver-table">
+				<thead>
+					<tr>
+						<th>编号</th>
+						<th>姓名</th>
+						<th>性别</th>
+						<th>电话</th>
+						<th>所在公司</th>
+						<th>车牌号</th>
+						<th>从业资格证号</th>
+						<th>积分</th>
+						<th>操作</th>
+					<!-- 
+						<th width="100">编号</th>
+						<th width="150">姓名</th>
+						<th width="100">性别</th>
+						<th width="150">电话</th>
+						<th width="200">所在公司</th>
+						<th width="150">车牌号</th>
+						<th width="150">从业资格证号</th>
+						<th width="150">积分</th>
+						<th>操作</th>
+						 -->
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="modal fade" id="new-driver-modal">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">添加的士</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label>姓名</label>
+						<input v-model="driverName" type="text" class="form-control" maxlength="4" />
+					</div>
+					<div class="form-group">
+						<label>性别</label>
+						<select v-model="driverSex" class="form-control">
+							<option value="1">男</option>
+							<option value="2">女</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label>电话</label>
+						<input v-model="driverPhone" type="text" class="form-control" maxlength="11" />
+					</div>
+
+					<div class="form-group">
+						<label>所在公司</label>
+						<input v-model="company" type="text" class="form-control" maxlength="20" />
+					</div>
+
+					<div class="form-group">
+						<label>从业资格证号</label>
+						<input v-model="qcno" type="text" class="form-control" maxlength="18" />
+					</div>
+					
+					<div class="form-group">
+						<label>车牌</label>
+						<input v-model="carno" type="text" class="form-control" maxlength="7" />
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" v-on:click="newDriver">确定</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+
+	<div class="modal fade" id="new-record-modal">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">添加记录</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label>内容</label>
+						<input v-model="content" type="text" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label>时间</label>
+						<input v-model="time" type="text" class="form-control" maxlength="4" id="datetimepicker" readonly/>
+					</div>
+
+					<div class="form-group">
+						<label>添加积分</label>
+						<input v-model="score" type="text" class="form-control" maxlength="10" />
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" v-on:click="addRecord">添加</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+
+	<div class="modal fade" id="record-modal">
+		<div class="modal-dialog modal-xs">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">记录列表</h4>
+				</div>
+				<div class="modal-body">
+					<table class="table table-striped" id="score-table">
+						<thead>
+							<tr>
+								<th style="width: 10px">#</th>
+								<th>内容</th>
+								<th>日期</th>
+								<th style="width: 40px">积分</th>
+							</tr>
+						</thead>
+						<tbody>
+							
+							<!-- 
+							<tr>
+								<td>1.</td>
+								<td>拾得钱包一只</td>
+								<td>2011-01-01 12:12:12</td>
+								<td><span class="badge bg-red">+55</span></td>
+							</tr>
+							 -->
+						</tbody>
+					</table>
+					<!-- 
+					<ul class="pagination pagination-sm pull-right">
+		              <li><a href="#">«</a></li>
+		              <li><a href="#">1</a></li>
+		              <li><a href="#">2</a></li>
+		              <li><a href="#">3</a></li>
+		              <li><a href="#">»</a></li>
+		            </ul>
+		             -->
+		            <div class="clearfix"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+</section>
+<!-- /.content -->
+<!-- Data Tables -->
+<link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.css">
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="assets/js/bootstrap-datetimepicker.js"></script>
+<script src="assets/js/driver.js"></script>

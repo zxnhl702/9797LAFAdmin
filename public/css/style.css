@@ -1,0 +1,195 @@
+body {
+	font-family: "微软雅黑";
+}
+
+.login {
+	width: 450px;
+	height: 280px;
+	top:50%;
+	left:50%;
+	margin-top:-140px;
+	margin-left:-225px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	-ms-border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+	-webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+	-moz-box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+	-o-box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+	-ms-box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+}
+
+.login-form-header {
+	font-size: 20px;
+	color: #525252;
+	border-bottom: 3px solid #CCEAFF;
+}
+
+.login-form>input {
+	width: 340px
+}
+
+.login-form>div label {
+	font-size: 14px;
+}
+
+.tech-support {
+	bottom: 50px
+}
+.manage-sider{
+	left: 0;
+	top:0
+}
+.manage-sider-header {
+	height: 135px;
+	line-height: 135px;
+}
+
+.manage-sider-nav {
+	background: #696969;
+	height: 100%;
+}
+
+.manage-sider-nav li {
+	font-size: 20px;
+}
+
+.manage-sider-nav li i {
+	height: 24px;
+	width: 21px;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 20px;
+	font-size: 24px;
+}
+
+.manage-sider-nav li.active {
+	background: #525252;
+}
+
+.manage-sider-nav li.active i {
+	color: #92BBFF;
+}
+
+.manage-content{
+	right:0;
+	top:0;
+	height: 100%;
+	overflow-y: scroll;
+}
+.manage-content::-webkit-scrollbar{
+	width: 0;
+	height: 0;
+}
+.manage-content-header {
+	height: 135px;
+	right:0;
+	top:0;
+	z-index: 2;
+}
+
+#update-status {
+	color: #fff;
+	width: 40px;
+	height: 20px;
+	line-height: 20px;
+	font-size: 16px;
+	margin: auto;
+	top:50%;
+	margin-top:-10px;
+	right: 30px;
+}
+#append{
+	width: 40px;
+	height: 20px;
+	line-height: 20px;
+	font-size: 16px;
+	margin: auto;
+	top:50%;
+	margin-top:-10px;
+	right: 120px;
+}
+
+/*update_list*/
+.update_list{
+	margin-top: 135px;
+}
+.ui-list li:hover{
+	background: #eee;
+}
+.ui-list li:active{
+	background: #ddd;
+}
+.ui-list-info h6{
+	font-size: 18px;
+}
+.ui-list-info span{
+	font-size:16px
+}
+.update_list h3 .date {
+	font-size: 20px;
+	line-height: 135px;
+	color: #666;
+}
+
+.update_list h3.sticky {
+	position: fixed;
+	top: 0;
+	left:20%;
+	z-index: 3;
+	width: 40%;
+	height: 135px;
+	-webkit-box-sizing: border-box
+}
+.date input{
+	font-size: 18px;
+	color: #333;
+	border:none;
+}
+.date .btn{
+	font-size: 14px;
+}
+/*mask*/
+.mask{
+	left: 0;
+	top:0;
+	height: 100%;
+	background: rgba(0,0,0,.6);
+	z-index: 3;
+}
+.mask .jp-video{
+	margin:auto;
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin-left:-241px;
+	margin-top:-216px;
+}
+.news-append-title{
+	width: 380px;
+	height: 40px;
+	line-height: 40px;
+	outline: 0;
+}
+.news-append-file{
+	width:380px;
+	height: 45px;
+	line-height: 45px;
+	font-size: 16px;
+	color:#6DB7FF;
+	border:1px solid #6DB7FF;
+	border-radius: 30px;
+	-webkit-border-radius: 30px;
+	box-sizing: border-box;
+	-webkit-box-sizing:border-box;
+	margin:15px auto 0 auto
+}
+.naf-back{
+	left: 0;
+	top:0;
+	background: rgba(0,0,0,.1);
+	height: 45px;
+}
