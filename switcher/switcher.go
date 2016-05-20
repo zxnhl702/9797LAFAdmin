@@ -54,7 +54,7 @@ func Dispatch(db *sql.DB) Xl {
 		"getAllDrivers": func(r *http.Request) (string, interface{}) {
 			// 检索sql
 			selectSql := "select c.id, c.name, c.sex, c.phone, c.qcno, c.company, c.carno, sum(g.score) " + 
-						"from civilizedTexi c left outer join goodRecord g on c.id = texiId group by c.id order by c.id"
+						"from civilizedTexi c left outer join goodRecord g on c.id = texiId where c.isDelete = 0 group by c.id order by c.id"
 			rows, err := db.Query(selectSql)
 			defer rows.Close()
 			perror(err, "获取文明的士列表失败")
@@ -210,6 +210,25 @@ func Dispatch(db *sql.DB) Xl {
 			}
 			return "修改密码成功", nil
 		},
+		
+		// 逻辑删除文明的士信息
+		"removeTexiDriver": func(r *http.Request) (string, interface{}) {
+			// 更新sql
+			updateSql := "update civilizedTexi set isDelete = 1 where id = ?"
+			// 记录编号
+			id := GetParameter(r, "id")
+			log.Println(id)
+			// 开始事务
+			tx, err := db.Begin()
+			// 异常情况下回滚
+			perrorWithRollBack(err, "删除文明的士信息失败", tx)
+			// 逻辑删除的士信息
+			_, err = tx.Exec(updateSql, id)
+			perrorWithRollBack(err, "删除文明的士信息失败", tx)
+			// 提交事务
+			tx.Commit()
+			return "删除文明的士信息成功", nil
+		},
 		// *************************************
 		// update end
 		// *************************************
@@ -236,26 +255,28 @@ func Dispatch(db *sql.DB) Xl {
 			return "删除失物信息成功", nil
 		},
 		
-		// 删除文明的士信息
-		"deleteTexiDriver": func(r *http.Request) (string, interface{}) {
-			// 删除sql
-			deleteSql := "delete from civilizedTexi where id = ?"
-			// 记录编号
-			id := GetParameter(r, "id")
-			log.Println(id)
-			// 开始事务
-			tx, err := db.Begin()
-			// 异常情况下回滚
-			perrorWithRollBack(err, "删除文明的士信息失败", tx)
-			stmt, err := tx.Prepare(deleteSql)
-			defer stmt.Close()
-			perrorWithRollBack(err, "删除文明的士信息失败", tx)
-			_, err = stmt.Exec(id)
-			perrorWithRollBack(err, "删除文明的士信息失败", tx)
-			// 提交事务
-			tx.Commit()
-			return "删除文明的士信息成功", nil
-		},
+//		// 删除文明的士信息
+//		"deleteTexiDriver": func(r *http.Request) (string, interface{}) {
+//			// 删除sql
+//			deleteSql := "delete from civilizedTexi where id = ?"
+//			delete2Sql := "delete from goodRecord where texiId = ?"
+//			// 记录编号
+//			id := GetParameter(r, "id")
+//			log.Println(id)
+//			// 开始事务
+//			tx, err := db.Begin()
+//			// 异常情况下回滚
+//			perrorWithRollBack(err, "删除文明的士信息失败", tx)
+//			// 删除好人好事记录
+//			_, err = tx.Exec(delete2Sql, id)
+//			perrorWithRollBack(err, "删除文明的士信息失败", tx)
+//			// 删除的士信息
+//			_, err = tx.Exec(deleteSql, id)
+//			perrorWithRollBack(err, "删除文明的士信息失败", tx)
+//			// 提交事务
+//			tx.Commit()
+//			return "删除文明的士信息成功", nil
+//		},
 		// *************************************
 		// delete end
 		// *************************************

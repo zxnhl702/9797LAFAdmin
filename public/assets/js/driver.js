@@ -303,7 +303,7 @@ $(function() {
 			function(index) {
 				// 删除本条失物信息
 				_callAjax({
-					"cmd": "deleteTexiDriver",
+					"cmd": "removeTexiDriver",
 					"id": rowData.id
 				}, function(d) {
 					layer.msg(d.errMsg);
